@@ -9,7 +9,7 @@ class OeCustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: GlobalConstant.mainSoft,
+      backgroundColor: GlobalConstant.mainBack,
       leading: IconButton(
         icon: Icon(
           Icons.chevron_left,

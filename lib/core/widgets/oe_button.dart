@@ -8,7 +8,6 @@ class OeButton extends StatelessWidget {
   final String text;
   final EnumButtonType? buttonType;
   final Color? color;
-  final Color? textColor;
   final bool isDisabled;
   final double? customHeight;
   final bool hasBorder;
@@ -20,7 +19,6 @@ class OeButton extends StatelessWidget {
     required this.text,
     this.buttonType,
     this.color,
-    this.textColor,
     this.isDisabled = false,
     this.customHeight,
     this.hasBorder = false,

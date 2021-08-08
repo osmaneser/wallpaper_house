@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wallpaper_house/ui/modules/category/category_view_model.dart';
 import 'package:wallpaper_house/ui/modules/home/home_view_model.dart';
+import 'package:wallpaper_house/ui/modules/home/image_detail_view_model.dart';
 
 import 'core/constants/global_constants.dart';
 import 'core/init/locator.dart';
@@ -13,7 +15,9 @@ void main() {
         return MyApp();
       },
       providers: [
-        ChangeNotifierProvider(create: (context)=> HomeViewModel(),)
+        ChangeNotifierProvider(create: (context)=> HomeViewModel(),),
+        ChangeNotifierProvider(create: (context)=> ImageDetailViewModel(),),
+        ChangeNotifierProvider(create: (context)=> CategoryViewModel(),),
       ],
     ),
   );

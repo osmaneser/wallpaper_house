@@ -5,24 +5,29 @@ import '../constants/global_constants.dart';
 import '../widgets/oe_button.dart';
 
 class DialogService {
-  static Future<void> confirmDialog(
-      {required String title,
-      required Widget content,
-      required BuildContext context,
-      bool onlyCancelButton = false,
-      required String confirmText,
-      String cancelText = "Kapat",
-      void Function()? onTap}) {
+  static Future<void> confirmDialog({
+    required String title,
+    required Widget content,
+    required BuildContext context,
+    bool onlyCancelButton = false,
+    required String confirmText,
+    String cancelText = "Kapat",
+    required void Function() onTap,
+  }) {
     return showDialog(
       context: context,
       useRootNavigator: false,
       builder: (context) {
         ThemeData themeData = Theme.of(context);
         return AlertDialog(
+          backgroundColor: GlobalConstant.mainBack.withOpacity(0.8),
           title: title != null
-              ? CustomContentText(
-                  text: title,
-                )
+              ? Align(
+                alignment: Alignment.center,
+                child: CustomContentText(
+                    text: title,
+                  ),
+              )
               : SizedBox(),
           content: Container(child: content),
           actions: [
@@ -35,7 +40,7 @@ class DialogService {
                     child: OeButton(
                       onTap: () => Navigator.pop(context),
                       text: cancelText,
-                      color: themeData.colorScheme.secondary,
+                      color: GlobalConstant.alternativeLive,
                     ),
                   ),
                   SizedBox(
@@ -45,9 +50,11 @@ class DialogService {
                       ? SizedBox()
                       : Expanded(
                           child: OeButton(
-                            onTap: ()=> onTap,
+                            onTap: () {
+                              Navigator.pop(context);
+                              return onTap();
+                            },
                             text: confirmText,
-                            color: themeData.primaryColor,
                           ),
                         )
                 ],
@@ -60,15 +67,10 @@ class DialogService {
   }
 
   static Future<void> alertDialog({
-    required  BuildContext context,
+    required BuildContext context,
     required String message,
     String confirmButtonText = "Tamam",
     String cancelButtonText = "Kapat",
-
-    ///
-    /// Kapat buttonu gösterir
-    /// Varsayılan true
-    ///
     bool showCloseButton = true,
     required EnumAlertType type,
     void Function()? onConfirmTap,
