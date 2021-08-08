@@ -33,7 +33,7 @@ class ImageDetailViewModel extends BaseViewModel {
     state = BaseState.Busy;
     var imageId = await ImageDownloader.downloadImage(imgUrl);
     if (imageId == null) {
-      state = BaseState.Busy;
+      state = BaseState.Error;
     } else {
       state = BaseState.Done;
     }

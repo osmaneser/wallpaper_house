@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wallpaper_house/core/constants/custom_enums.dart';
 import 'package:wallpaper_house/core/constants/size_constant.dart';
+import 'package:wallpaper_house/core/models/base_view_model.dart';
 import 'package:wallpaper_house/core/services/dialog_service.dart';
 import 'package:wallpaper_house/core/widgets/oe_button.dart';
 import 'package:wallpaper_house/core/widgets/oe_custom_app_bar.dart';
@@ -34,7 +36,7 @@ class ImageDetailPage extends StatelessWidget {
   Widget getImage(BuildContext context, String imgUrl, double height) {
     return Image.network(
       imgUrl,
-      fit: BoxFit.cover,
+      fit: BoxFit.contain,
     );
   }
 
@@ -53,14 +55,28 @@ class ImageDetailPage extends StatelessWidget {
                         context: context,
                         confirmText: "Evet",
                         onTap: () async {
-                          await Provider.of<ImageDetailViewModel>(context, listen: false).setWallpaper(context: context, img: image.imgUrl);
+                          final vModel = Provider.of<ImageDetailViewModel>(context, listen: false);
+                          await vModel.setWallpaper(context: context, img: image.imgUrl);
+                          if (vModel.state == BaseState.Done) {
+                            DialogService.alertDialog(
+                                context: context, message: "İşlem Başarıyla gerçekleştirildi.", type: EnumAlertType.Success);
+                          }
                         });
                   },
                   text: "Set Wallpaper")),
           Spacer(flex: 1),
-          Expanded(flex: 5, child: OeButton(onTap: () async{
-            await Provider.of<ImageDetailViewModel>(context, listen: false).downloadImage(image.imgUrl);
-          }, text: "Download")),
+          Expanded(
+              flex: 5,
+              child: OeButton(
+                  onTap: () async {
+                    final vModel = Provider.of<ImageDetailViewModel>(context, listen: false);
+                    await vModel.downloadImage(image.imgUrl);
+                     if (vModel.state == BaseState.Done) {
+                            DialogService.alertDialog(
+                                context: context, message: "İşlem Başarıyla gerçekleştirildi.", type: EnumAlertType.Success);
+                          }
+                  },
+                  text: "Download")),
         ],
       ),
     );

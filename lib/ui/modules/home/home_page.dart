@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wallpaper_house/core/constants/global_constants.dart';
-import 'package:wallpaper_house/core/constants/size_constant.dart';
 import 'package:wallpaper_house/core/models/base_view_model.dart';
 import 'package:wallpaper_house/core/widgets/oe_custom_circular_spinner.dart';
 import 'package:wallpaper_house/core/widgets/oe_custom_content_text.dart';

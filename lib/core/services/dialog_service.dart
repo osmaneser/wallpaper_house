@@ -83,6 +83,7 @@ class DialogService {
         useRootNavigator: false,
         builder: (context) {
           return AlertDialog(
+            backgroundColor: GlobalConstant.mainBack.withOpacity(0.8),
             content: Container(
               height: MediaQuery.of(context).size.height * .3,
               child: Column(
@@ -96,11 +97,7 @@ class DialogService {
                         SizedBox(
                           height: 24,
                         ),
-                        Text(
-                          message,
-                          style: themeData.textTheme.caption,
-                          textAlign: TextAlign.center,
-                        )
+                        CustomContentText(text: message)
                       ],
                     ),
                   ),
@@ -120,7 +117,7 @@ class DialogService {
 
                                       if (onCloseTap != null) onCloseTap();
                                     },
-                                    color: GlobalConstant.mainSoft,
+                                    color: GlobalConstant.alternativeLive,
                                     text: cancelButtonText,
                                   ),
                                 ),
@@ -134,7 +131,6 @@ class DialogService {
                                         child: OeButton(
                                           onTap: () => onConfirmTap,
                                           text: confirmButtonText,
-                                          color: themeData.accentColor,
                                         ),
                                       )
                                     : SizedBox()
